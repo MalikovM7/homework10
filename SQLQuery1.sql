@@ -1,0 +1,63 @@
+create database Library
+
+use Library
+
+create table dbo.Books(
+[Id] int primary key identity(1,1),
+[Name] varchar(40) not null,
+[Author] varchar(20),
+[Genre] varchar(20) not null,
+[Price] float ,
+[PageCount] int,
+[Published] datetime not null,
+[CreatedDate] datetime DEFAULT GETDATE())
+
+drop table Books
+
+INSERT INTO dbo.Books (Name, Author, Genre, Price, PageCount, Published, CreatedDate)
+VALUES
+('The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction', 25.99, 180, '1925-04-10', '2024-03-08'),
+('To Kill a Mockingbird', 'Harper Lee', 'Fiction', 29.99, 281, '1960-07-11', '2024-03-08'),
+('1984', 'George Orwell', 'Dystopian', 19.99, 328, '1949-06-08', '2024-03-08'),
+('Pride and Prejudice', 'Jane Austen', 'Romance', 22.99, 279, '1813-01-28', '2024-03-08'),
+('The Hobbit', 'J.R.R. Tolkien', 'Fantasy', 27.99, 310, '1937-09-21', '2024-03-08'),
+('The Catcher in the Rye', 'J.D. Salinger', 'Fiction', 24.99, 224, '1951-07-16', '2024-03-08'),
+('Harry Potter and the Philosopher''s Stone', 'J.K. Rowling', 'Fantasy', 32.99, 309, '1997-06-26', '2024-03-08'),
+('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 'Fantasy', 34.99, 341, '1998-07-02', '2024-03-08'),
+('The Da Vinci Code', 'Dan Brown', 'Mystery', 28.99, 454, '2003-03-18', '2024-03-08'),
+('The Hunger Games', 'Suzanne Collins', 'Science Fiction', 26.99, 374, '2008-09-14', '2024-03-08');
+
+
+select * from Books
+
+--1) Ordering by price
+
+SELECT * FROM Books
+ORDER BY Price DESC;
+
+--2) Select top3 lowest
+
+SELECT TOP 3 Price
+FROM Books
+ORDER BY Price;
+
+--3) Select by Author
+
+SELECT *
+FROM Books
+WHERE Author = 'J.K. Rowling';
+
+--4) Delete the Books which price is higher than 30Azn
+
+Delete from Books where Price>30
+
+
+--5) Drop the table
+
+DROP TABLE IF EXISTS Books;
+
+--6) Update table so the price will increase by 5% to the Books of Author Jane Austen
+
+UPDATE Books
+SET Price = Price * 1.05
+WHERE Author = 'Jane Austen';
